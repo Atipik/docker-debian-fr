@@ -1,0 +1,20 @@
+#! /bin/bash
+
+name=$1
+host=$2
+port=$3
+
+while :
+do
+    currentHost=${!host}
+    currentPort=${!port}
+
+    echo "Waiting for $name $currentHost:$currentPort"
+    nc -z $currentHost $currentPort
+    if [ $? -eq 0 ]
+    then
+        break
+    fi
+
+    sleep 1
+done
