@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:wheezy
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TIMEZONE Europe/Paris
@@ -37,6 +37,9 @@ RUN echo 'alias ll="ls -lsh"' >> .bash_aliases
 RUN echo 'alias ls="ls -F --color=auto --group-directories-first"' >> .bash_aliases
 RUN echo 'alias suvi="sudo vim"' >> .bash_aliases
 RUN echo 'alias vi="vim"' >> .bash_aliases
+
+# Clean
+RUN rm -rf /var/lib/apt/lists/*
 
 USER nonrootuser
 
