@@ -38,6 +38,9 @@ RUN echo 'alias ls="ls -F --color=auto --group-directories-first"' >> .bash_alia
 RUN echo 'alias suvi="sudo vim"' >> .bash_aliases
 RUN echo 'alias vi="vim"' >> .bash_aliases
 
+# Clean
+RUN rm -rf /var/lib/apt/lists/*
+
 USER nonrootuser
 
 CMD ['bash']
