@@ -25,22 +25,20 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get update -y && apt-get install -y build-essential libpng-dev
 
 # Install common utils
-RUN apt-get update -y && apt-get install -y git wget curl apt-utils sudo vim bzip2 python vim netcat
-ADD wait_service /usr/local/bin/
+RUN apt-get update -y && apt-get install -y git wget curl apt-utils sudo vim python vim netcat
+COPY wait_service /usr/local/bin/
+
+# Clean
+RUN rm -rf /var/lib/apt/lists/*
 
 # User
 RUN useradd -m -u 1000 nonrootuser
 RUN echo "nonrootuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/nonrootuser
 RUN chmod 0440 /etc/sudoers.d/nonrootuser
-RUN echo 'alias la="ll -a"' >> .bash_aliases
-RUN echo 'alias ll="ls -lsh"' >> .bash_aliases
-RUN echo 'alias ls="ls -F --color=auto --group-directories-first"' >> .bash_aliases
-RUN echo 'alias suvi="sudo vim"' >> .bash_aliases
-RUN echo 'alias vi="vim"' >> .bash_aliases
-
-# Clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN echo '. ~/.bash_aliases' >> /root/.bashrc
+COPY .bash_aliases /root/.bash_aliases
+COPY .bash_aliases /home/nonrootuser/.bash_aliases
 
 USER nonrootuser
 
-CMD ['bash']
+CMD ["/bin/bash"]
