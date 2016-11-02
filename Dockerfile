@@ -22,7 +22,7 @@ RUN echo $TIMEZONE > /etc/timezone && dpkg-reconfigure tzdata
 RUN apt-get update -y && apt-get upgrade -y
 
 # Install common dev lib
-RUN apt-get update -y && apt-get install -y build-essential libpng-dev
+RUN apt-get update -y && apt-get install -y build-essential libpng-dev autoconf automake python-dev
 
 # Install common utils
 RUN apt-get update -y && apt-get install -y git wget curl apt-utils sudo vim python vim netcat
