@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:8.2
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TIMEZONE Europe/Paris
